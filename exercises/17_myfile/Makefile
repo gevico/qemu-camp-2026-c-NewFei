@@ -5,10 +5,17 @@ TARGET := 17_myfile
 SRCS := 17_myfile.c
 OBJS := $(SRCS:.c=.o)
 
-all: $(TARGET)
+all: $(TARGET) 17_myfile.o
 
-# TODO: 在这里添加你的代码
-# I AM NOT DONE
+$(TARGET): $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $^
+
+17_myfile.o: 17_myfile.c
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+$(OBJDIR)/%.o: %.c
+	@mkdir -p $(OBJDIR)
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
 	rm -f $(TARGET) $(OBJS)
