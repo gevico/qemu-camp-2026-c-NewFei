@@ -21,14 +21,23 @@ static void josephus_problem(int n, int k, int m) {
     Node* prev = head;
     while (prev->next != head) prev = prev->next;
 
-    // 起始位置移动到第 k 个
     for (int i = 1; i < k; ++i) {
-        // TODO: 在这里添加你的代码
-        // I AM NOT DONE
+        prev = current;
+        current = current->next;
     }
 
-    // TODO: 在这里添加你的代码
-    // I AM NOT DONE
+    while (current->next != current) {
+        for (int i = 0; i < m - 1; ++i) {
+            prev = current;
+            current = current->next;
+        }
+        printf("%d ", current->id);
+        prev->next = current->next;
+        free(current);
+        current = prev->next;
+    }
+    printf("%d ", current->id);
+    free(current);
     
     printf("\n");
 }
